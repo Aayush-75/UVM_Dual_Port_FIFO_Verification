@@ -7,7 +7,7 @@ class my_sequence extends uvm_sequence#(seq_item);
     endfunction
 
     task body();
-        forever 
+       
             begin
                 req = seq_item::type_id::create("req");
                 start_item(req);

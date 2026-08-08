@@ -32,7 +32,7 @@ class op_mon extends uvm_monitor;
                 my_seq_item.full = intrf.op_mon_cb.full;
                 my_seq_item.empty = intrf.op_mon_cb.empty;
                 op_mon_analysis_port.write(my_seq_item);
-                `uvm_info(get_type_name(),$sformatf("[%0t]: OP_MON: DATA_OUT=%0d FULL=%0d EMPTY=%0d",$time,my_seq_item.data_out,my_seq_item.full,my_seq_item.empty),UVM_MEDIUM);
+                //`uvm_info(get_type_name(),$sformatf("[%0t]: OP_MON: DATA_OUT=%0d FULL=%0d EMPTY=%0d",$time,my_seq_item.data_out,my_seq_item.full,my_seq_item.empty),UVM_MEDIUM);
             end
     endtask
 

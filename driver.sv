@@ -24,9 +24,10 @@ class my_driver extends uvm_driver#(seq_item);
         forever 
         begin
            @(intrf.drv_cb); //to make start at reactive region of 10
+	   //$display("[%0t]",$time);
            seq_item_port.get_next_item(req);
            drive();
-           seq_item_port.item_done(req); 
+           seq_item_port.item_done(); 
         end
     endtask
 

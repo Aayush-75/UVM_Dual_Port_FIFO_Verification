@@ -34,7 +34,7 @@ class ip_mon extends uvm_monitor;
             my_seq_item.rd_en = intrf.ip_mon_cb.rd_en;
             my_seq_item.data_in = intrf.ip_mon_cb.data_in;
             ip_mon_analysis_port.write(my_seq_item);
-            `uvm_info(get_type_name(),$sformatf("[%0t]: IP_MON: WR_CS=%0d RD_CS=%0d WR_EN=%0d RD_EN=%0d DATA_IN=%0d",$time,my_seq_item.wr_cs,my_seq_item.rd_cs,my_seq_item.wr_en,my_seq_item.rd_en,my_seq_item.data_in),UVM_MEDIUM);
+            //`uvm_info(get_type_name(),$sformatf("[%0t]: IP_MON: WR_CS=%0d RD_CS=%0d WR_EN=%0d RD_EN=%0d DATA_IN=%0d",$time,my_seq_item.wr_cs,my_seq_item.rd_cs,my_seq_item.wr_en,my_seq_item.rd_en,my_seq_item.data_in),UVM_MEDIUM);
         end
     endtask
 
