@@ -1,0 +1,23 @@
+class op_agent extends uvm_agent;
+
+    `uvm_component_utils(op_agent)
+
+    fifo_config my_config;
+    my_driver drv;
+    ip_mon mon;
+    my_sequencer sqr;
+
+    function new(string name="op_agent", uvm_component parent = null);
+        super.new(name,parent);
+    endfunction
+
+    function void build_phase(uvm_phases phase);
+        if(!uvm_config_db#(fifo_config)::get(this,"","intrf",my_config))
+            `uvm_fatal(get_type_name(),"FAILED TO GET CONFIGURATION FILE")
+        if(my_config.in_agent == UVM_PASSIVE)
+            begin
+                mon = ip_mon::type_id::create("mon");
+            end
+    endfunction
+
+endclass
