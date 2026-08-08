@@ -2,7 +2,7 @@ class op_mon extends uvm_monitor;
 
     `uvm_component_utils(op_mon)
 
-    virtual if_fifo.op_mon_mod intrf;
+    virtual fifo_if.op_mon_mod intrf;
     fifo_config my_config;
     seq_item my_seq_item;
     uvm_analysis_port#(seq_item) op_mon_analysis_port;
@@ -15,6 +15,7 @@ class op_mon extends uvm_monitor;
         super.build_phase(phase);
         if(!uvm_config_db#(fifo_config)::get(this,"","intrf",my_config))
             `uvm_fatal(get_type_name(),"FAILED TO ATTACH CONFIG FILE");
+	op_mon_analysis_port = new("op_mon_analysis_port", this);
     endfunction
 
     function void connect_phase(uvm_phase phase);

@@ -7,8 +7,8 @@ class my_scb extends uvm_scoreboard;
     seq_item ip;
     seq_item op;
 
-    uvm_tlm_fifo#(seq_item) ip_fifo;
-    uvm_tlm_fifo#(seq_item) op_fifo;
+    uvm_tlm_analysis_fifo#(seq_item) ip_fifo;
+    uvm_tlm_analysis_fifo#(seq_item) op_fifo;
 
     bit [`DATA_WIDTH-1:0]mem[`RAM_DEPTH];
     bit [`ADDR_WIDTH-1:0]wr_counter;

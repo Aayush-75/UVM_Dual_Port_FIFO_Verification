@@ -17,10 +17,10 @@ class ip_agent extends uvm_agent;
             `uvm_fatal(get_type_name(),"FAILED TO GET CONFIGURATION FILE");
         if(my_config.in_agent == UVM_ACTIVE)
             begin
-                drv = my_driver::type_id::create("drv");
-                sqr = my_sequencer::type_id::create("sqr");
+                drv = my_driver::type_id::create("drv",this);
+                sqr = my_sequencer::type_id::create("sqr",this);
             end
-        mon = ip_mon::type_id::create("mon");
+        mon = ip_mon::type_id::create("mon",this);
     endfunction
 
 endclass

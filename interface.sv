@@ -1,6 +1,6 @@
 `include "defines.sv"
 
-interface fifo_if(clk,rst);
+interface fifo_if(input clk,rst);
 
     bit wr_cs,rd_cs,wr_en,rd_en;
     bit [`DATA_WIDTH:0]data_in;
@@ -13,9 +13,9 @@ interface fifo_if(clk,rst);
         output wr_cs,rd_cs,wr_en,rd_en,data_in;
     endclocking 
 
-    clocking in_mon_cb @(posedge clk);
+    clocking ip_mon_cb @(posedge clk);
         default input #1 output #0;
-        input full,empty,data_out;
+        input wr_cs,rd_cs,wr_en,rd_en,data_in;
     endclocking 
 
     clocking op_mon_cb @(posedge clk);
@@ -25,6 +25,6 @@ interface fifo_if(clk,rst);
 
 
     modport drv_mod(clocking drv_cb, input clk,rst);
-    modport ip_mon_mod(clocking inp_mon_cb, input clk,rst);
+    modport ip_mon_mod(clocking ip_mon_cb, input clk,rst);
     modport op_mon_mod(clocking op_mon_cb, input clk,rst);
 endinterface

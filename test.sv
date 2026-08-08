@@ -18,7 +18,6 @@ class test extends uvm_test;
         env = environment::type_id::create("env",this);
         my_config.in_agent = UVM_ACTIVE;
         my_config.op_agent = UVM_PASSIVE;
-        seq = my_sequencer::type_id::create("seq",this);
 	uvm_config_db#(fifo_config)::set(this,"*","intrf",my_config);
     endfunction
 
@@ -26,27 +25,27 @@ class test extends uvm_test;
         phase.raise_objection(this);
 	seq = my_sequence::type_id::create("seq");
         seq_item::type_id::set_type_override(seq1::get_type());
-        repeat(300) seq.start(env.ip_agent.sqr);
+        repeat(300) seq.start(env.ia.sqr);
         seq_item::type_id::set_type_override(seq2::get_type());
-        repeat(300) seq.start(env.ip_agent.sqr);
+        repeat(300) seq.start(env.ia.sqr);
         seq_item::type_id::set_type_override(seq1::get_type());
-        repeat(30) seq.start(env.ip_agent.sqr);
+        repeat(30) seq.start(env.ia.sqr);
         seq_item::type_id::set_type_override(seq3::get_type());
-        repeat(200) seq.start(env.ip_agent.sqr);
+        repeat(200) seq.start(env.ia.sqr);
         seq_item::type_id::set_type_override(seq1::get_type());
-        repeat(50) seq.start(env.ip_agent.sqr);
+        repeat(50) seq.start(env.ia.sqr);
         seq_item::type_id::set_type_override(seq4::get_type());
-        repeat(50) seq.start(env.ip_agent.sqr);
+        repeat(50) seq.start(env.ia.sqr);
         seq_item::type_id::set_type_override(seq5::get_type());
-        repeat(50) seq.start(env.ip_agent.sqr);
+        repeat(50) seq.start(env.ia.sqr);
         seq_item::type_id::set_type_override(seq2::get_type());
-        repeat(5) seq.start(env.ip_agent.sqr);
+        repeat(5) seq.start(env.ia.sqr);
         seq_item::type_id::set_type_override(seq6::get_type());
-        repeat(50) seq.start(env.ip_agent.sqr);
+        repeat(50) seq.start(env.ia.sqr);
         seq_item::type_id::set_type_override(seq7::get_type());
-        repeat(50) seq.start(env.ip_agent.sqr);
+        repeat(50) seq.start(env.ia.sqr);
         seq_item::type_id::set_type_override(seq2::get_type());
-        repeat(100) seq.start(env.ip_agent.sqr);
+        repeat(100) seq.start(env.ia.sqr);
         phase.raise_objection(this);
     endtask
 endclass

@@ -2,7 +2,7 @@ class my_driver extends uvm_driver#(seq_item);
 
     `uvm_component_utils(my_driver)
 
-    virtual if_fifo.drv_mod intrf;
+    virtual fifo_if.drv_mod intrf;
     fifo_config my_config;
 
     function new(string name = "my_driver", uvm_component parent = null);
