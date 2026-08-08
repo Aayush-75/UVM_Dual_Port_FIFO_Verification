@@ -12,12 +12,14 @@ class test extends uvm_test;
 
     function void build_phase(uvm_phase phase);
         super.build_phase(phase);
-        if(!uvm_config_db#(fifo_config)::get(this,"","intrf",my_config))
+	my_config = fifo_config::type_id::create("my_config");
+        if(!uvm_config_db#(virtual fifo_if)::get(this,"","intrf",my_config.intrf))
             `uvm_fatal(get_type_name(),"FAILED TO GET CONFIG FILE");
         env = environment::type_id::create("env",this);
         my_config.in_agent = UVM_ACTIVE;
         my_config.op_agent = UVM_PASSIVE;
-        sqr = my_sequencer::type_id::create("sqr",this);
+        seq = my_sequencer::type_id::create("seq",this);
+	uvm_config_db#(fifo_config)::set(this,"*","intrf",my_config);
     endfunction
 
     task run_phase(uvm_phase phase);

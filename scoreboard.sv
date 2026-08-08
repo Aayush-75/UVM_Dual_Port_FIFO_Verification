@@ -27,7 +27,7 @@ class my_scb extends uvm_scoreboard;
         op_fifo = new("op_fifo",this);
     endfunction
 
-    task run_phase(uvm_phase phase)
+    task run_phase(uvm_phase phasei);
         op_fifo.get(op);
         ip_fifo.get(ip);
         ref_model();
@@ -35,7 +35,7 @@ class my_scb extends uvm_scoreboard;
     endtask
 
     task ref_model();
-        `uvm_info(get_type_name(),$sformat("[%0t]: SCB: WR_CS=%0d RD_CS=%0d WR_EN=%0d RD_EN=%0d DATA_IN=%0d",ip.wr_cs,ip.rd_cs,ip.wr_en,ip.rd_en,ip.data_in),UVM_MEDIUM);
+        `uvm_info(get_type_name(),$sformatf("[%0t]: SCB: WR_CS=%0d RD_CS=%0d WR_EN=%0d RD_EN=%0d DATA_IN=%0d",$time,ip.wr_cs,ip.rd_cs,ip.wr_en,ip.rd_en,ip.data_in),UVM_MEDIUM);
         if(ip.wr_en && ip.wr_cs && (diff()!=(`RAM_DEPTH-1)))
             begin
                 mem[wr_counter] = ip.data_in;
@@ -68,16 +68,16 @@ class my_scb extends uvm_scoreboard;
             begin
                 PASS++;
                 $display("-------------------PASS:[%0d]---------------------------",PASS);
-                `uvm_info(get_type_name(),"[%0t]: SCB: DATA_OUT=%0d FULL=%0d EMPTY=%0d",data_out,ip.full,ip.empty,UVM_MEDIUM);
-                `uvm_info(get_type_name(),"[%0t]: SCB: DATA_OUT=%0d FULL=%0d EMPTY=%0d",op.data_out,op.full,op.empty,UVM_MEDIUM);
+                `uvm_info(get_type_name(),$sformatf("[%0t]: SCB: DATA_OUT=%0d FULL=%0d EMPTY=%0d",$time,data_out,ip.full,ip.empty),UVM_MEDIUM);
+                `uvm_info(get_type_name(),$sformatf("[%0t]: SCB: DATA_OUT=%0d FULL=%0d EMPTY=%0d",$time,op.data_out,op.full,op.empty),UVM_MEDIUM);
                 $display("");
             end
         else 
             begin
                 FAIL++;
                 $display("-------------------FAIL:[%0d]---------------------------",FAIL);
-                `uvm_info(get_type_name(),"[%0t]: SCB: DATA_OUT=%0d FULL=%0d EMPTY=%0d",data_out,ip.full,ip.empty,UVM_MEDIUM);
-                `uvm_info(get_type_name(),"[%0t]: SCB: DATA_OUT=%0d FULL=%0d EMPTY=%0d",op.data_out,op.full,op.empty,UVM_MEDIUM);
+                `uvm_info(get_type_name(),$sformatf("[%0t]: SCB: DATA_OUT=%0d FULL=%0d EMPTY=%0d",$time,data_out,ip.full,ip.empty),UVM_MEDIUM);
+                `uvm_info(get_type_name(),$sformatf("[%0t]: SCB: DATA_OUT=%0d FULL=%0d EMPTY=%0d",$time,op.data_out,op.full,op.empty),UVM_MEDIUM);
                 $display("");
             end
     endtask

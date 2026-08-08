@@ -1,6 +1,6 @@
 `include "pkg.sv"
-`include "ram_dp_ar_aw.v"
-`include "syn_fifo.v"
+`include "ram_dp_ar_aw.sv"
+`include "syn_fifo.sv"
 
 module top;
 
@@ -19,7 +19,7 @@ module top;
 
  	initial
 	begin
-		uvm_config_db#(fifo_if)::set(null,"*","intrf",DUV_IF);
+		uvm_config_db#(virtual fifo_if)::set(null,"*","intrf",DUV_IF);
 	        run_test("test");
 	end	
     

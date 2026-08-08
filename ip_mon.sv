@@ -14,7 +14,7 @@ class ip_mon extends uvm_monitor;
     function void build_phase(uvm_phase phase);
         super.build_phase(phase);
         if(!uvm_config_db#(fifo_config)::get(this,"","intrf",my_config))
-            `uvm_fatal(this,"FAILED TO GET CONFIG FILE");
+            `uvm_fatal(get_type_name(),"FAILED TO GET CONFIG FILE");
     endfunction
 
     function void connect_phase(uvm_phase phase);
