@@ -1,5 +1,4 @@
-class environment extends uvm_environment;
-
+class environment extends uvm_env;
 
     `uvm_component_utils(environment)
 
@@ -7,7 +6,7 @@ class environment extends uvm_environment;
     op_agent oa;
     my_scb scb;
 
-    function new(string name="environment",uvm_component parent = null)
+    function new(string name="environment",uvm_component parent = null);
         super.new(name,parent);
     endfunction
 
@@ -18,7 +17,7 @@ class environment extends uvm_environment;
         scb = my_scb::type_id:create("scb",this);
     endfunction
 
-    function void connect_phase(uvm_phase phase)
+    function void connect_phase(uvm_phase phase);
         ia.mon.ip_mon_analysis_port.connect(scb.ip_fifo);
         oa.mon.op_mon_analysis_port.connect(scb.op_fifo);
     endfunction

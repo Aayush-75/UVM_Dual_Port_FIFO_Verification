@@ -11,9 +11,10 @@ class ip_agent extends uvm_agent;
         super.new(name,parent);
     endfunction
 
-    function void build_phase(uvm_phases phase);
+    function void build_phase(uvm_phase phase);
+	super.build_phase(phase);
         if(!uvm_config_db#(fifo_config)::get(this,"","intrf",my_config))
-            `uvm_fatal(get_type_name(),"FAILED TO GET CONFIGURATION FILE")
+            `uvm_fatal(get_type_name(),"FAILED TO GET CONFIGURATION FILE");
         if(my_config.in_agent == UVM_ACTIVE)
             begin
                 drv = my_driver::type_id::create("drv");

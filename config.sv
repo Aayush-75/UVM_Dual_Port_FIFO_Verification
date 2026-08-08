@@ -4,7 +4,7 @@ class fifo_config extends uvm_object;
 
     virtual if_fifo intrf;
 
-    agent_active_passive_enum in_agent;
-    agent_active_passive_enum op_agent;
+    uvm_active_passive_enum in_agent;
+    uvm_active_passive_enum op_agent;
 
 endclass

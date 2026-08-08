@@ -18,7 +18,7 @@ class ip_mon extends uvm_monitor;
     endfunction
 
     function void connect_phase(uvm_phase phase);
-        intrf = my_config.intrf
+        intrf = my_config.intrf;
     endfunction
 
     task run_phase(uvm_phase phase);

@@ -1,6 +1,6 @@
 `include "defines.sv"
 
-interface if_fifo(clk,rst);
+interface fifo_if(clk,rst);
 
     bit wr_cs,rd_cs,wr_en,rd_en;
     bit [`DATA_WIDTH:0]data_in;

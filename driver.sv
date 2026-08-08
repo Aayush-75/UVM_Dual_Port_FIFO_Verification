@@ -16,7 +16,7 @@ class my_driver extends uvm_driver#(seq_item);
     endfunction
 
     function void connect_phase(uvm_phase phase);
-        intrf = my_config.intrf
+        intrf = my_config.intrf;
     endfunction
 
     task run_phase(uvm_phase phase);
@@ -26,7 +26,7 @@ class my_driver extends uvm_driver#(seq_item);
            @(intrf.drv_cb); //to make start at reactive region of 10
            seq_item_port.get_next_item(req);
            drive();
-           seq_item_port.finish_item(req); 
+           seq_item_port.item_done(req); 
         end
     endtask
 

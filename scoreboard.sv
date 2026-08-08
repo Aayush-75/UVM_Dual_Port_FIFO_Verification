@@ -5,7 +5,7 @@ class my_scb extends uvm_scoreboard;
     `uvm_component_utils(my_scb)
 
     seq_item ip;
-    seq_itm op;
+    seq_item op;
 
     uvm_tlm_fifo#(seq_item) ip_fifo;
     uvm_tlm_fifo#(seq_item) op_fifo;
@@ -30,16 +30,16 @@ class my_scb extends uvm_scoreboard;
     task run_phase(uvm_phase phase)
         op_fifo.get(op);
         ip_fifo.get(ip);
-        ref();
+        ref_model();
         check();
     endtask
 
-    task ref();
+    task ref_model();
         `uvm_info(get_type_name(),$sformat("[%0t]: SCB: WR_CS=%0d RD_CS=%0d WR_EN=%0d RD_EN=%0d DATA_IN=%0d",ip.wr_cs,ip.rd_cs,ip.wr_en,ip.rd_en,ip.data_in),UVM_MEDIUM);
         if(ip.wr_en && ip.wr_cs && (diff()!=(`RAM_DEPTH-1)))
             begin
                 mem[wr_counter] = ip.data_in;
-                wr_counter++:
+                wr_counter++;
             end
         if(ip.rd_en && ip.rd_cs && (diff()!=0))
             begin

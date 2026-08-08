@@ -1,4 +1,4 @@
-`include "test_package.sv"
+`include "pkg.sv"
 `include "ram_dp_ar_aw.v"
 `include "syn_fifo.v"
 
