@@ -27,11 +27,11 @@ class my_scb extends uvm_scoreboard;
         op_fifo = new("op_fifo",this);
     endfunction
 
-    task run_phase(uvm_phase phasei);
+    task run_phase(uvm_phase phase);
         op_fifo.get(op);
         ip_fifo.get(ip);
         ref_model();
-        check();
+        chekk();
     endtask
 
     task ref_model();
@@ -63,7 +63,7 @@ class my_scb extends uvm_scoreboard;
             diff = wr_counter - rd_counter;
     endfunction
 
-    task check();
+    task chekk();
         if(data_out==op.data_out && ip.full==op.full && ip.empty==op.empty)
             begin
                 PASS++;

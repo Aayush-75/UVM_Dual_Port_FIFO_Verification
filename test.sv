@@ -23,7 +23,7 @@ class test extends uvm_test;
     endfunction
 
     task run_phase(uvm_phase phase);
-        phase.raise_objection();
+        phase.raise_objection(this);
 	seq = my_sequence::type_id::create("seq");
         seq_item::type_id::set_type_override(seq1::get_type());
         repeat(300) seq.start(env.ip_agent.sqr);
@@ -47,6 +47,6 @@ class test extends uvm_test;
         repeat(50) seq.start(env.ip_agent.sqr);
         seq_item::type_id::set_type_override(seq2::get_type());
         repeat(100) seq.start(env.ip_agent.sqr);
-        phase.raise_objection();
+        phase.raise_objection(this);
     endtask
 endclass
