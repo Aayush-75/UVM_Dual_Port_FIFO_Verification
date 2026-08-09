@@ -2,6 +2,8 @@
 `include "interface.sv" 
 `include "ram_dp_ar_aw.sv"
 `include "syn_fifo.sv"
+`include "checker.sv"	
+	
 
 module top;
 
@@ -12,6 +14,10 @@ module top;
 
     fifo_if DUV_IF(clk,rst);
 
+    bind syn_fifo fifo_assertions u_assert
+	(
+		.clk(clk),.rst(rst),.wr_en(DUV_IF.wr_en),.rd_en(DUV_IF.rd_en),.wr_cs(DUV_IF.wr_cs),.rd_cs(DUV_IF.rd_cs),.full(DUV_IF.full),.empty(DUV_IF.empty),.data_out(DUV_IF.data_out)
+	);
     syn_fifo DUV(clk,rst,DUV_IF.wr_cs,DUV_IF.rd_cs,DUV_IF.data_in,DUV_IF.rd_en,DUV_IF.wr_en,DUV_IF.data_out,DUV_IF.empty,DUV_IF.full);
 
     initial
