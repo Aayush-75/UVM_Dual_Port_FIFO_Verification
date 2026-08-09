@@ -5,7 +5,8 @@ class environment extends uvm_env;
     ip_agent ia;
     op_agent oa;
     my_scb scb;
-
+    my_coverage cvrg;  
+ 
     function new(string name="environment",uvm_component parent = null);
         super.new(name,parent);
     endfunction
@@ -15,11 +16,13 @@ class environment extends uvm_env;
         ia = ip_agent::type_id::create("ip_agent",this);
         oa = op_agent::type_id::create("op_agent",this);
         scb = my_scb::type_id::create("scb",this);
+	cvrg = my_coverage::type_id::create("cvrg",this);
     endfunction
 
     function void connect_phase(uvm_phase phase);
         ia.mon.ip_mon_analysis_port.connect(scb.ip_fifo.analysis_export);
         oa.mon.op_mon_analysis_port.connect(scb.op_fifo.analysis_export);
+	ia.mon.ip_mon_analysis_port.connect(cvrg.analysis_export);
     endfunction
     
 endclass

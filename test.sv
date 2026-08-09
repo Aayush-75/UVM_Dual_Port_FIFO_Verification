@@ -32,7 +32,7 @@ class test extends uvm_test;
         seq_item::type_id::set_type_override(seq1::get_type());
         repeat(1) seq.start(env.ia.sqr);
         seq_item::type_id::set_type_override(seq2::get_type());
-        repeat(1) seq.start(env.ia.sqr);
+        //repeat(2) seq.start(env.ia.sqr);
         seq_item::type_id::set_type_override(seq1::get_type());
         //repeat(30) seq.start(env.ia.sqr);
         seq_item::type_id::set_type_override(seq3::get_type());
@@ -51,7 +51,7 @@ class test extends uvm_test;
         //repeat(50) seq.start(env.ia.sqr);
         seq_item::type_id::set_type_override(seq2::get_type());
         //repeat(100) seq.start(env.ia.sqr);
-	#100ns;
+	#30ns;
         phase.drop_objection(this);
     endtask
 endclass

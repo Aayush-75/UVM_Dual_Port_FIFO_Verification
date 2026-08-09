@@ -23,7 +23,7 @@ class ip_mon extends uvm_monitor;
     endfunction
 
     task run_phase(uvm_phase phase);
-        repeat(2) @(posedge intrf.clk); //to make forever start at active region of 30
+        repeat(3) @(posedge intrf.clk); //to make forever start at active region of 30
         forever 
         begin
             @(intrf.ip_mon_cb); //this will unblock at reactive region of 30

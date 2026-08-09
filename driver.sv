@@ -20,10 +20,10 @@ class my_driver extends uvm_driver#(seq_item);
     endfunction
 
     task run_phase(uvm_phase phase);
-        @(posedge intrf.clk); //to make start at active region of 10
+        repeat(2) @(posedge intrf.clk); //to make start at active region of 30
         forever 
         begin
-           @(intrf.drv_cb); //to make start at reactive region of 10
+           @(intrf.drv_cb); //to make start at reactive region of 30
 	   //$display("[%0t]",$time);
            seq_item_port.get_next_item(req);
            drive();

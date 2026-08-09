@@ -11,8 +11,8 @@ class my_scb extends uvm_scoreboard;
     uvm_tlm_analysis_fifo#(seq_item) op_fifo;
 
     bit [`DATA_WIDTH-1:0]mem[`RAM_DEPTH];
-    bit [`ADDR_WIDTH-1:0]wr_counter;
-    bit [`ADDR_WIDTH-1:0]rd_counter;
+    bit [`ADDR_WIDTH:0]wr_counter;
+    bit [`ADDR_WIDTH:0]rd_counter;
     bit [`DATA_WIDTH-1:0]data_out;
 
     int PASS,FAIL;
@@ -39,7 +39,7 @@ class my_scb extends uvm_scoreboard;
 
     task ref_model();
         `uvm_info(get_type_name(),$sformatf("[%0t]: REF_INPUT: WR_CS=%0d RD_CS=%0d WR_EN=%0d RD_EN=%0d DATA_IN=%0d",$time,ip.wr_cs,ip.rd_cs,ip.wr_en,ip.rd_en,ip.data_in),UVM_MEDIUM);
-        if(ip.wr_en && ip.wr_cs && (diff()!=(`RAM_DEPTH-1)))
+        if(ip.wr_en && ip.wr_cs && (diff()!=(`RAM_DEPTH)))
             begin
                 mem[wr_counter] = ip.data_in;
                 wr_counter++;
@@ -53,7 +53,7 @@ class my_scb extends uvm_scoreboard;
             begin
                 ip.empty = 1;
             end
-        if(diff() == (`RAM_DEPTH-1))
+        if(diff() == (`RAM_DEPTH))
             begin
                 ip.full = 1;        
             end
